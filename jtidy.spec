@@ -1,7 +1,8 @@
+%define		_rel 1.1
 Summary:	HTML syntax checker and pretty printer
 Name:		jtidy
 Version:	1.0
-Release:	0.20000804r7dev.1
+Release:	0.20000804r7dev.%{_rel}
 License:	BSD-style
 URL:		http://jtidy.sourceforge.net/
 Source0:	http://dl.sourceforge.net/jtidy/%{name}-04aug2000r7-dev.zip
@@ -11,8 +12,7 @@ Patch0:		%{name}.noapis.patch
 Group:		Applications/Text
 BuildRequires:	jakarta-ant >= 1.6
 Requires:	jaxp_parser_impl
-Requires:	xml-commons-apis
-Requires:	xml-commons-apis
+Requires:	xml-commons
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
