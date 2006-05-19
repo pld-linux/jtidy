@@ -11,7 +11,7 @@ Source0:	http://dl.sourceforge.net/jtidy/%{name}-04aug2000r7-dev.zip
 Source1:	%{name}.jtidy.script
 Patch0:		%{name}.noapis.patch
 URL:		http://jtidy.sourceforge.net/
-BuildRequires:	jakarta-ant >= 1.6
+BuildRequires:	ant >= 1.6
 Requires:	jaxp_parser_impl
 Requires:	xml-commons
 BuildArch:	noarch
