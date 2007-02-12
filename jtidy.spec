@@ -1,6 +1,6 @@
 %define		_rel 1.1
 Summary:	HTML syntax checker and pretty printer
-Summary(pl):	Narzêdzie do sprawdzania sk³adni HTML i ³adnego drukowania
+Summary(pl.UTF-8):   NarzÄ™dzie do sprawdzania skÅ‚adni HTML i Å‚adnego drukowania
 Name:		jtidy
 Version:	1.0
 Release:	0.20000804r7dev.%{_rel}
@@ -23,27 +23,27 @@ printer. Like its non-Java cousin, JTidy can be used as a tool for
 cleaning up malformed and faulty HTML. In addition, JTidy provides a
 DOM parser for real-world HTML.
 
-%description -l pl
-JTidy to javowy port narzêdzia HTML Tidy s³u¿±cego do sprawdzania
-sk³adni HTML i ³adnego drukowania. Podobnie do niejavowego kuzyna
-JTidy mo¿e s³u¿yæ za narzêdzie do czyszczenia ¼le sformu³owanego i
-b³êdnego HTML-a. Ponadto JTidy udostêpnia analizator DOM dla HTML-a
-spotykanego w rzeczywisto¶ci.
+%description -l pl.UTF-8
+JTidy to javowy port narzÄ™dzia HTML Tidy sÅ‚uÅ¼Ä…cego do sprawdzania
+skÅ‚adni HTML i Å‚adnego drukowania. Podobnie do niejavowego kuzyna
+JTidy moÅ¼e sÅ‚uÅ¼yÄ‡ za narzÄ™dzie do czyszczenia Åºle sformuÅ‚owanego i
+bÅ‚Ä™dnego HTML-a. Ponadto JTidy udostÄ™pnia analizator DOM dla HTML-a
+spotykanego w rzeczywistoÅ›ci.
 
 %package javadoc
 Summary:	Javadoc for %{name}
-Summary(pl):	Dokumentacja javadoc dla pakietu %{name}
+Summary(pl.UTF-8):   Dokumentacja javadoc dla pakietu %{name}
 Group:		Documentation
 
 %description javadoc
 Javadoc for %{name}.
 
-%description javadoc -l pl
+%description javadoc -l pl.UTF-8
 Dokumentacja javadoc dla pakietu %{name}.
 
 %package scripts
 Summary:	Utility scripts for %{name}
-Summary(pl):	Skrypty narzêdziowe dla pakietu %{name}
+Summary(pl.UTF-8):   Skrypty narzÄ™dziowe dla pakietu %{name}
 Group:		Applications/Text
 Requires:	%{name} = %{version}-%{release}
 Requires:	jpackage-utils >= 0:1.5
@@ -51,8 +51,8 @@ Requires:	jpackage-utils >= 0:1.5
 %description scripts
 Utility scripts for %{name}.
 
-%description scripts -l pl
-Skrypty narzêdziowe dla pakietu %{name}.
+%description scripts -l pl.UTF-8
+Skrypty narzÄ™dziowe dla pakietu %{name}.
 
 %prep
 %setup -q -n %{name}-04aug2000r7-dev
