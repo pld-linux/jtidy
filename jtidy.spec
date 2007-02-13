@@ -1,6 +1,6 @@
 %define		_rel 1.1
 Summary:	HTML syntax checker and pretty printer
-Summary(pl.UTF-8):   Narzędzie do sprawdzania składni HTML i ładnego drukowania
+Summary(pl.UTF-8):	Narzędzie do sprawdzania składni HTML i ładnego drukowania
 Name:		jtidy
 Version:	1.0
 Release:	0.20000804r7dev.%{_rel}
@@ -32,7 +32,7 @@ spotykanego w rzeczywistości.
 
 %package javadoc
 Summary:	Javadoc for %{name}
-Summary(pl.UTF-8):   Dokumentacja javadoc dla pakietu %{name}
+Summary(pl.UTF-8):	Dokumentacja javadoc dla pakietu %{name}
 Group:		Documentation
 
 %description javadoc
@@ -43,7 +43,7 @@ Dokumentacja javadoc dla pakietu %{name}.
 
 %package scripts
 Summary:	Utility scripts for %{name}
-Summary(pl.UTF-8):   Skrypty narzędziowe dla pakietu %{name}
+Summary(pl.UTF-8):	Skrypty narzędziowe dla pakietu %{name}
 Group:		Applications/Text
 Requires:	%{name} = %{version}-%{release}
 Requires:	jpackage-utils >= 0:1.5
