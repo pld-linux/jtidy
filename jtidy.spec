@@ -1,4 +1,5 @@
 %define		_rel 1.1
+%include	/usr/lib/rpm/macros.java
 Summary:	HTML syntax checker and pretty printer
 Summary(pl.UTF-8):	Narzędzie do sprawdzania składni HTML i ładnego drukowania
 Name:		jtidy
@@ -10,8 +11,12 @@ Source0:	http://dl.sourceforge.net/jtidy/%{name}-04aug2000r7-dev.zip
 # Source0-md5:	8fa91a760f7eea722e57f8b8da4a7d5f
 Source1:	%{name}.jtidy.script
 Patch0:		%{name}.noapis.patch
+Patch1:		%{name}-version.patch
 URL:		http://jtidy.sourceforge.net/
 BuildRequires:	ant >= 1.6
+BuildRequires:	jpackage-utils
+BuildRequires:	rpm-javaprov
+BuildRequires:	rpmbuild(macros) >= 1.300
 Requires:	jaxp_parser_impl
 Requires:	xml-commons
 BuildArch:	noarch
@@ -34,6 +39,7 @@ spotykanego w rzeczywistości.
 Summary:	Javadoc for %{name}
 Summary(pl.UTF-8):	Dokumentacja javadoc dla pakietu %{name}
 Group:		Documentation
+Requires:	jpackage-utils
 
 %description javadoc
 Javadoc for %{name}.
@@ -57,15 +63,17 @@ Skrypty narzędziowe dla pakietu %{name}.
 %prep
 %setup -q -n %{name}-04aug2000r7-dev
 %patch0 -p0
+%patch1 -p1
 # remove all binary libs, javadocs, and included JAXP API sources
-find . -name "*.jar" -exec rm -f {} \;
+find -name "*.jar" | xargs rm -rf
 rm -rf doc/api src/org/xml src/org/w3c/dom
 # correct silly permissions
-chmod -R go=u-w *
+chmod -R go=u-w .
 
 %build
 export CLASSPATH=$(build-classpath xml-commons-apis)
-ant jar javadoc
+%ant jar javadoc \
+	-Dcompile.source=1.4
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -99,26 +107,19 @@ EOF
 rm -rf $RPM_BUILD_ROOT
 
 %post javadoc
-rm -f %{_javadocdir}/%{name}
-ln -s %{name}-%{version} %{_javadocdir}/%{name}
-
-%postun javadoc
-if [ $1 -eq 0 ]; then
-	rm -f %{_javadocdir}/%{name}
-fi
+ln -sf %{name}-%{version} %{_javadocdir}/%{name}
 
 %files
 %defattr(644,root,root,755)
 %doc LICENSE NOTES doc/devel
-%{_javadir}/*
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/ant.d/%{name}
+%{_javadir}/*.jar
 
 %files javadoc
 %defattr(644,root,root,755)
-%dir %{_javadocdir}/%{name}-%{version}
-%{_javadocdir}/%{name}-%{version}/*
-%ghost %dir %{_javadocdir}/%{name}
+%{_javadocdir}/%{name}-%{version}
+%ghost %{_javadocdir}/%{name}
 
 %files scripts
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/*
+#%attr(755,root,root) %{_bindir}/*
