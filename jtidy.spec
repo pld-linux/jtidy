@@ -1,4 +1,4 @@
-%define		_rel 1.1
+%define		_rel 2
 %include	/usr/lib/rpm/macros.java
 Summary:	HTML syntax checker and pretty printer
 Summary(pl.UTF-8):	Narzędzie do sprawdzania składni HTML i ładnego drukowania
@@ -64,11 +64,9 @@ Skrypty narzędziowe dla pakietu %{name}.
 %setup -q -n %{name}-04aug2000r7-dev
 %patch0 -p0
 %patch1 -p1
+
 # remove all binary libs, javadocs, and included JAXP API sources
-find -name "*.jar" | xargs rm -rf
-rm -rf doc/api src/org/xml src/org/w3c/dom
-# correct silly permissions
-chmod -R go=u-w .
+find -name '*.jar' | xargs rm -v
 
 %build
 export CLASSPATH=$(build-classpath xml-commons-apis)
@@ -77,16 +75,10 @@ export CLASSPATH=$(build-classpath xml-commons-apis)
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 # jar
 install -d $RPM_BUILD_ROOT%{_javadir}
 cp -a build/Tidy.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-%{version}.jar
-# jar versioning
-cd $RPM_BUILD_ROOT%{_javadir}
-for jar in *-%{version}.jar; do
-	ln -sf ${jar} `echo $jar| %{__sed} "s|-%{version}||g"`
-done
-cd -
+ln -s %{name}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}.jar
 
 # javadoc
 install -d $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
@@ -99,7 +91,7 @@ cp -a %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/%{name}
 
 # ant.d
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/ant.d
-cat > $RPM_BUILD_ROOT%{_sysconfdir}/ant.d/%{name} << EOF
+cat > $RPM_BUILD_ROOT%{_sysconfdir}/ant.d/%{name} << 'EOF'
 jtidy xml-commons-apis
 EOF
 
@@ -122,4 +114,4 @@ ln -sf %{name}-%{version} %{_javadocdir}/%{name}
 
 %files scripts
 %defattr(644,root,root,755)
-#%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/*
