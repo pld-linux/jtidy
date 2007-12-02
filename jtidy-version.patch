@@ -1,10 +1,11 @@
---- jtidy-04aug2000r7-dev/build.xml~	2007-04-18 01:24:27.618554040 +0300
-+++ jtidy-04aug2000r7-dev/build.xml	2007-04-18 01:25:54.800539688 +0300
-@@ -60,6 +60,7 @@
+--- jtidy-04aug2000r7-dev/build.xml	2007-04-18 01:25:54.800539688 +0300
++++ jtidy-04aug2000r7-dev/build.xml	2007-12-02 20:19:42.901313355 +0200
+@@ -60,6 +60,8 @@
  	 includes="**/*.java"
  	 deprecation="on"
  	 optimize="${optimize}"
 +	 source="${compile.source}"
++	 target="${compile.target}"
  	 debug="${debug}"/>
   </target>
  
