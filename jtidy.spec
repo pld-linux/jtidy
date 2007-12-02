@@ -1,4 +1,6 @@
-%define		_rel 2
+%define		_rel 3
+%define		_java_source	1.4
+%define		_java_target	1.4
 %include	/usr/lib/rpm/macros.java
 Summary:	HTML syntax checker and pretty printer
 Summary(pl.UTF-8):	Narzędzie do sprawdzania składni HTML i ładnego drukowania
@@ -71,7 +73,8 @@ find -name '*.jar' | xargs rm -v
 %build
 export CLASSPATH=$(build-classpath xml-commons-apis)
 %ant jar javadoc \
-	-Dcompile.source=1.4
+	-Dcompile.target=%{_java_target} \
+	-Dcompile.source=%{_java_source}
 
 %install
 rm -rf $RPM_BUILD_ROOT
