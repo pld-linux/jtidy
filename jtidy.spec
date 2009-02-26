@@ -16,11 +16,13 @@ Patch0:		%{name}.noapis.patch
 Patch1:		%{name}-version.patch
 URL:		http://jtidy.sourceforge.net/
 BuildRequires:	ant >= 1.6
+BuildRequires:	java-gcj-compat-devel
+BuildRequires:	java-xml-commons
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
 Requires:	jaxp_parser_impl
-Requires:	xml-commons
+Requires:	java-xml-commons
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -73,6 +75,7 @@ find -name '*.jar' | xargs rm -v
 %build
 export CLASSPATH=$(build-classpath xml-commons-apis)
 %ant jar javadoc \
+	-Dbuild.compiler=extJavac \
 	-Dcompile.target=%{_java_target} \
 	-Dcompile.source=%{_java_source}
 
