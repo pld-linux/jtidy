@@ -9,20 +9,22 @@ Version:	1.0
 Release:	0.20000804r7dev.%{_rel}
 License:	BSD-style
 Group:		Applications/Text
-Source0:	http://dl.sourceforge.net/jtidy/%{name}-04aug2000r7-dev.zip
+Source0:	http://downloads.sourceforge.net/jtidy/%{name}-04aug2000r7-dev.zip
 # Source0-md5:	8fa91a760f7eea722e57f8b8da4a7d5f
 Source1:	%{name}.jtidy.script
 Patch0:		%{name}.noapis.patch
 Patch1:		%{name}-version.patch
 URL:		http://jtidy.sourceforge.net/
 BuildRequires:	ant >= 1.6
-BuildRequires:	java-gcj-compat-devel
 BuildRequires:	java-xml-commons
+BuildRequires:	jdk
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
-Requires:	jaxp_parser_impl
+Requires:	java(jaxp_parser_impl)
+Requires:	java-jtidy = %{version}-%{release}
 Requires:	java-xml-commons
+Requires:	jpackage-utils
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -51,18 +53,17 @@ Javadoc for %{name}.
 %description javadoc -l pl.UTF-8
 Dokumentacja javadoc dla pakietu %{name}.
 
-%package scripts
-Summary:	Utility scripts for %{name}
-Summary(pl.UTF-8):	Skrypty narzędziowe dla pakietu %{name}
-Group:		Applications/Text
+%package -n java-jtidy
+Summary:	Java HTML syntax checker library
+Summary(pl.UTF-8):	Biblioteka Javy do sprawdzania składni HTML
+Group:		Libraries/Java
 Requires:	%{name} = %{version}-%{release}
-Requires:	jpackage-utils >= 0:1.5
 
-%description scripts
-Utility scripts for %{name}.
+%description -n java-jtidy
+Java HTML syntax checker library.
 
-%description scripts -l pl.UTF-8
-Skrypty narzędziowe dla pakietu %{name}.
+%description -n java-jtidy -l pl.UTF-8
+Biblioteka Javy do sprawdzania składni HTML.
 
 %prep
 %setup -q -n %{name}-04aug2000r7-dev
@@ -89,7 +90,7 @@ ln -s %{name}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}.jar
 # javadoc
 install -d $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
 cp -a doc/api/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
-ln -sf %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name}
+ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name} # ghost symlink
 
 # shell script
 install -d $RPM_BUILD_ROOT%{_bindir}
@@ -109,6 +110,10 @@ ln -sf %{name}-%{version} %{_javadocdir}/%{name}
 
 %files
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/jtidy
+
+%files -n java-jtidy
+%defattr(644,root,root,755)
 %doc LICENSE NOTES doc/devel
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/ant.d/%{name}
 %{_javadir}/*.jar
@@ -117,7 +122,3 @@ ln -sf %{name}-%{version} %{_javadocdir}/%{name}
 %defattr(644,root,root,755)
 %{_javadocdir}/%{name}-%{version}
 %ghost %{_javadocdir}/%{name}
-
-%files scripts
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/*
