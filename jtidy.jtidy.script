@@ -17,10 +17,9 @@ MAIN_CLASS=org.w3c.tidy.Tidy
 BASE_JARS="jaxp_parser_impl jtidy xml-commons-apis"
 
 # Set parameters
-set_jvm
 set_classpath $BASE_JARS
 set_flags $BASE_FLAGS
 set_options $BASE_OPTIONS
 
 # Let's start
-run "$@"
+run ${1:+$@}
