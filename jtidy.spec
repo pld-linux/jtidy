@@ -21,6 +21,7 @@ BuildRequires:	jdk
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
+BuildRequires:	unzip
 Requires:	java(jaxp_parser_impl)
 Requires:	java-jtidy = %{version}-%{release}
 Requires:	java-xml-commons
