@@ -1,4 +1,4 @@
-%define		_rel 3
+%define		_rel 4
 %define		_java_source	1.2
 %define		_java_target	1.2
 %include	/usr/lib/rpm/macros.java
