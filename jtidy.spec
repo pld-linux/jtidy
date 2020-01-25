@@ -1,7 +1,6 @@
 %define		_rel 4
 %define		_java_source	1.2
 %define		_java_target	1.2
-%include	/usr/lib/rpm/macros.java
 Summary:	HTML syntax checker and pretty printer
 Summary(pl.UTF-8):	Narzędzie do sprawdzania składni HTML i ładnego drukowania
 Name:		jtidy
